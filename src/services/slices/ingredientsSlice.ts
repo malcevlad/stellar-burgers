@@ -13,7 +13,7 @@ interface TIngredientsState {
   orderModalData: TOrder | null;
 }
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
   ingredients: [],
   isLoading: false,
   constructorItems: {
@@ -26,18 +26,12 @@ const initialState: TIngredientsState = {
 
 export const getIngredients = createAsyncThunk(
   'ingredients/getIngredients',
-  async () => {
-    const response = await getIngredientsApi();
-    return response;
-  }
+  getIngredientsApi
 );
 
 export const orderBurger = createAsyncThunk(
   'ingredients/orderBurger',
-  async (data: string[]) => {
-    const response = await orderBurgerApi(data);
-    return response;
-  }
+  orderBurgerApi
 );
 
 const ingredientsSlice = createSlice({
@@ -79,7 +73,10 @@ const ingredientsSlice = createSlice({
       ];
     },
     clearConstructor: (state) => {
-      initialState;
+      state.constructorItems = {
+        bun: null,
+        ingredients: []
+      };
       state.orderModalData = null;
       state.orderRequest = false;
     }
@@ -135,4 +132,4 @@ export const {
   swapUp
 } = ingredientsSlice.actions;
 
-export default ingredientsSlice.reducer;
+export default ingredientsSlice;

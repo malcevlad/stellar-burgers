@@ -20,7 +20,7 @@ interface TUserState {
   orders: TOrder[];
 }
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   user: null,
   isAuthChecked: false,
   isAuth: false,
@@ -45,61 +45,18 @@ export const userApi = createAsyncThunk('user/userApi', getUserApi);
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',
-  async (data: TRegisterData, { rejectWithValue }) => {
-    try {
-      const response = await registerUserApi(data);
-      return response;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
-    }
-  }
+  registerUserApi
 );
 
-export const loginUser = createAsyncThunk(
-  'user/loginUser',
-  async (data: TLoginData, { rejectWithValue }) => {
-    try {
-      const response = await loginUserApi(data);
-      return response;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+export const loginUser = createAsyncThunk('user/loginUser', loginUserApi);
 
-export const logoutUser = createAsyncThunk(
-  'user/logoutUser',
-  async (_, { rejectWithValue }) => {
-    try {
-      await logoutApi();
-    } catch (error: any) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+export const logoutUser = createAsyncThunk('user/logoutUser', logoutApi);
 
-export const updateUser = createAsyncThunk(
-  'user/updateUser',
-  async (data: TLoginData, { rejectWithValue }) => {
-    try {
-      const response = await updateUserApi(data);
-      return response;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+export const updateUser = createAsyncThunk('user/updateUser', updateUserApi);
 
 export const getUserOrders = createAsyncThunk(
   'user/getUserOrders',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await getOrdersApi();
-      return response;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
-    }
-  }
+  getOrdersApi
 );
 
 const userSlice = createSlice({
@@ -194,4 +151,4 @@ export const {
   userOrdersSelector
 } = userSlice.selectors;
 
-export default userSlice.reducer;
+export default userSlice;
