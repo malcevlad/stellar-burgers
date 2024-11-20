@@ -1,0 +1,8 @@
+{
+    "success": true,
+    "name": "Тестовый бургер",
+    "order": {
+        "status": "done",
+        "number": 57673
+    }
+}

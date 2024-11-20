@@ -9,10 +9,10 @@ import {
 } from 'react-redux';
 import feedSlice from './slices/feedSlice';
 
-const rootReducer = combineReducers({
-  user: userSlice,
-  ingredients: ingredientsSlice,
-  feed: feedSlice
+export const rootReducer = combineReducers({
+  [userSlice.name]: userSlice.reducer,
+  [ingredientsSlice.name]: ingredientsSlice.reducer,
+  [feedSlice.name]: feedSlice.reducer
 });
 
 const store = configureStore({
